@@ -2,18 +2,21 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="TestTableMapper">
-    <resultMap id="result" type="com.example.demo.domain.TestTableItem">
-        <result property="id" column="ID" />
-        <result property="seq" column="SEQ" />
-    </resultMap>
+<mapper namespace="com.kjh.springbatch.product.infra.db.ProductMyBatisRepository">
 
-    <select id="selectTest" parameterType="hashmap" resultMap="result">
+    <select id="findAll" resultMap="hashmap">
 	<![CDATA[
-        SELECT ID, SEQ
-        FROM MY_TEST_TABLE
-        WHERE ID <= #{seq}
+        SELECT id, name, img_url, price
+        FROM PRODUCT
         ]]>
+	</select>
+
+	<select id="findById" parameterType="long" resultMap="hashmap">
+		<![CDATA[
+		SELECT id, name, img_url, price
+		FROM PRODUCT
+		WHERE id = #{id}
+		]]>
 	</select>
 
 </mapper>
